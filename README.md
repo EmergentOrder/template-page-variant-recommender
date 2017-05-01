@@ -4,7 +4,7 @@ The PVR gets data from the PredictionIO EventServer. From events a model is trai
 
 [For some discussion of the underlying algorithm and citations](algorithm.md)
 
-#EventServer
+# EventServer
 The EventServer uses a Simple REST API for POSTing events in JSON form. Events can be an array of up to 50 events of the form described below. Insert events in JSON form like so: 
 
 ```
@@ -13,13 +13,13 @@ curl -i -X POST http://localhost:7070/events.json?accessKey=$ACCESS_KEY \
 -d $JSONHERE
 ```
 
-#Data Input for the Page Variant Recommender
+# Data Input for the Page Variant Recommender
 
 The PVR uses only one event type.
 Page View / Conversion events are triggered by the action of displaying a page to a user and whether their page view results in a conversion or not.
 It also contains the id of the test grouping [which groups together a set of page-variants to be considered]. 
 
-#User Attributes
+# User Attributes
 
 The user attributes (context) can consist of any number of features, which do not need to be specified in advance. However, for the context to have an effect, we should have the same context features whenever possible within a single test grouping. 
 
@@ -70,7 +70,7 @@ http://localhost:7070/batch/events.json
 ]
 ```
 
-#Initialize test group
+# Initialize test group
 
 The system needs to  know what page-variants can be recommended for each test group in advance, so that it can sample from them to make recommendations. That means the test group must be initialized before the system is trained and queries are made against it (for a given testGroup).
 
@@ -92,7 +92,7 @@ Note that once the testPeriod has elapsed, that the recommender will then be det
 
 You can also set a test group again, to re-run the same test. You can update the testPeriodStart and testPeriodEnd properties by using another $set just like above. Please be sure however to not update the pageVariants or you may see undesirable results. In case you wish to create another test with different pageVariants, define a brand new testGroup.
 
-#Usage Events/Indicators
+# Usage Events/Indicators
 
 All usage events can be thought of as (user-id, page-variant-id, test-group-id, conversion, context) but they must be encoded into PIO EventServer "events". 
 
@@ -114,7 +114,7 @@ Using the SDK of your choice (or directly using REST to the Eventserver, as seen
 
 Here the targetEntityId can be any string.
 
-#Page Variant Recommender Query API
+# Page Variant Recommender Query API
 
 Each engine has its own PredictionServer that can be queried. It is implemented in a REST API through the GET verb. A server is launched when you run `pio deploy`. The GET request will have a JSON query that is specific to a single engine. You may with to construct these with one of the PredictionIO SDKs. For the Page Variant Recommender here are some examples that work with the above data.
 
@@ -136,7 +136,7 @@ This will get recommendations for user: "psmith", These will be returned as a JS
 
 Note that you can also request a page variant for a new or anonymous user, in which case the recommendations will be based purely on the context features (e.g. gender, country, etc.). If there is no information about the user the most frequently converted variant will be returned
 
-#Configuration of the Page Variant Recommender
+# Configuration of the Page Variant Recommender
 
 The Page Variant Recommender has a configuration file called engine.json in the root directory. This defines parameters for all phases of the engine. The phases are data preparation, model building, and prediction server deployment. For the Page Variant Recommender all static parameters are kept here. The configurations makes liberal use of defaults so just because a parameter is not mentioned in engine.json does not mean the param is unspecified. Note that JSON does not allow comments, so don't cut and paste from below, instead refer to the actual engine.json.
 ```
@@ -173,7 +173,7 @@ The Page Variant Recommender has a configuration file called engine.json in the 
 }
 ```
 
-#Training
+# Training
 Invoke:
 ```
 pio train
@@ -229,7 +229,7 @@ $ make test    # (optional)
 $ make install
 ```
 
-#Vowpal Java Wrapper Build
+# Vowpal Java Wrapper Build
 
 ```
 $ cd java
