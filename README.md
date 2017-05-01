@@ -192,7 +192,7 @@ and train again. Now training will run continuously.
 
 Because PIO was not designed for streaming data sources, instead we poll in an infinite loop against the EventServer for new events. There is no polling period  or timeout (apart from those already in place in PIO / dependencies). As soon as one training iteration has finished, we poll and do another training iteration.
 
-#Notes
+# Notes
 
 This template requires Vowpal Wabbit. The included dependency in the build.sbt has been tested on Ubuntu 14.04 only. If you encounter issues, please build VW from source, per instructions below.
 
